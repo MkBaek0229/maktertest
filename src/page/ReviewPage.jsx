@@ -28,17 +28,22 @@ function ReviewPage() {
   useEffect(() => {
     const fetchReviews = async (restaurantId) => {
       try {
-        const response = await fetch("http://localhost:3000/api/v1/reviews");
+        const response = await fetch(
+          `http://localhost:3000/api/v1/reviews/${restaurantId}`
+        );
         if (!response.ok) {
           throw new Error("Failed to fetch reviews");
         }
+
         const data = await response.json();
-        setReviews(data.data);
+        console.log(data.reviews);
+        setReviews(data.reviews);
       } catch (error) {
         console.error("Error fetching reviews:", error);
       }
     };
-  }, []);
+    fetchReviews(restranutInfo.id); // restranutInfo.id를 사용하여 요청 보내기
+  }, [restranutInfo.id]); // restranutInfo.id가 변경될 때마다 실행
 
   const handleReviewListClick = () => {
     setShowReviewList(true);

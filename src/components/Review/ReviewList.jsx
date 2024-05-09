@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import ReviewItem from "./ReviewItem";
 
-function ReviewList({ reviews, restaurants_id }) {
+function ReviewList({ reviews }) {
   return (
     <ReviewListContainer>
       <ul>
