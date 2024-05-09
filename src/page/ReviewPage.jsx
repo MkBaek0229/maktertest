@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
@@ -25,6 +25,22 @@ function ReviewPage() {
   const [showWriteReview, setShowWriteReview] = useState(false);
   const [reviews, setReviews] = useState([]);
 
+  useEffect(() => {
+    const fetchReviews = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/api/v1/reviews");
+        if (!response.ok) {
+          throw new Error("Failed to fetch reviews");
+        }
+        const data = await response.json();
+        setReviews(data.data);
+      } catch (error) {
+        console.error("Error fetching reviews:", error);
+      }
+    };
+    fetchReviews();
+  }, []);
+
   const handleReviewListClick = () => {
     setShowReviewList(true);
     setShowWriteReview(false);
@@ -37,13 +53,14 @@ function ReviewPage() {
 
   const lastId = useRef(4);
 
-  const onSubmit = (username, content, date, hashtags) => {
+  const onSubmit = (username, content, date, hashtags, rating) => {
     const updateReviews = reviews.concat({
       id: lastId.current,
       username,
       content,
       date,
       hashtags,
+      rating,
     });
 
     setReviews(updateReviews);

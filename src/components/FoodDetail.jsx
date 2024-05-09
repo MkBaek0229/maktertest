@@ -10,6 +10,7 @@ function FoodDetail({ selectedRestaurant, onMapMove }) {
   const [isDetailModalOpen, setDetailModalOpen] = useState(false);
   const [restaurants, setRestaurants] = useState([]);
   const [reviews, setReviews] = useState([]);
+  const [mapposition, setMapPosition] = useState([]);
 
   const navigate = useNavigate();
 
@@ -54,11 +55,12 @@ function FoodDetail({ selectedRestaurant, onMapMove }) {
       selectedRestaurant.latitude,
       selectedRestaurant.longitude
     );
-    onMapMove &&
-      onMapMove({
+    onMapMove(
+      setMapPosition({
         latitude: selectedRestaurant.latitude,
         longitude: selectedRestaurant.longitude,
-      }); // 위치 정보 전달
+      })
+    ); // 위치 정보 전달
   };
 
   return (

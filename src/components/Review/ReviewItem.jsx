@@ -1,14 +1,23 @@
 import React from "react";
 import styled from "styled-components";
+import RatingStars from "./RatingStars";
 
 function ReviewItem({ review }) {
-  const { id, username, content, date, hashtags } = review;
+  const {
+    review_id,
+    username,
+    review_contents,
+    review_date,
+    hashtags,
+    rating,
+  } = review;
 
   return (
     <ReviewItemContainer>
       <Username>{username}</Username>
-      <Content>{content}</Content>
-      <Date>{date}</Date>
+      <RatingStars rating={rating} />
+      <Content>{review_contents}</Content>
+      <Date>{review_date}</Date>
       {hashtags && (
         <HashTagsContainer>
           {hashtags.map((tag, index) => (

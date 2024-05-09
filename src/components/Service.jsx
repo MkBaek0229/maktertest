@@ -159,6 +159,7 @@ const Service = () => {
       const checkedItems = document.querySelectorAll(
         'input[type="radio"]:checked'
       );
+
       const newProgress = (checkedItems.length / totalQuestions) * 100;
       setProgress(newProgress);
 
