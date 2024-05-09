@@ -26,7 +26,7 @@ function ReviewPage() {
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
-    const fetchReviews = async () => {
+    const fetchReviews = async (restaurantId) => {
       try {
         const response = await fetch("http://localhost:3000/api/v1/reviews");
         if (!response.ok) {
@@ -38,7 +38,6 @@ function ReviewPage() {
         console.error("Error fetching reviews:", error);
       }
     };
-    fetchReviews();
   }, []);
 
   const handleReviewListClick = () => {
@@ -123,7 +122,9 @@ function ReviewPage() {
             </ReviewButton>
           </ReviewPanel>
 
-          {showReviewList && <ReviewList reviews={reviews} />}
+          {showReviewList && (
+            <ReviewList reviews={reviews} id={restranutInfo.restaurants_id} />
+          )}
           {showWriteReview && <WriteReview onSubmit={onSubmit} />}
         </ReviewContainer>
 
