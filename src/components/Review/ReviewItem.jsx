@@ -3,14 +3,8 @@ import styled from "styled-components";
 import RatingStars from "./RatingStars";
 
 function ReviewItem({ review }) {
-  const {
-    review_id,
-    username,
-    review_contents,
-    review_date,
-    hashtags,
-    rating,
-  } = review;
+  const { review_id, username, review_contents, review_date, hashtag, rating } =
+    review;
 
   return (
     <ReviewItemContainer>
@@ -18,13 +12,9 @@ function ReviewItem({ review }) {
       <RatingStars rating={rating} />
       <Content>{review_contents}</Content>
       <Date>{review_date}</Date>
-      {hashtags && (
-        <HashTagsContainer>
-          {hashtags.map((tag, index) => (
-            <HashTag key={index}>#{tag}</HashTag>
-          ))}
-        </HashTagsContainer>
-      )}
+      <HashTagsContainer>
+        <HashTag>#{hashtag}</HashTag>
+      </HashTagsContainer>
     </ReviewItemContainer>
   );
 }
